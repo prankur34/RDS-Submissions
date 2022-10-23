@@ -1,0 +1,15 @@
+.makeFloors {
+  margin: 4rem;
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+
+  border-top: 1px dashed rgb(15, 167, 71);
+}
+.makeLifts {
+  height: 50px;
+  position: relative;
+  top: -3rem;
+  width: 25px;
+  background-color: rebeccapurple;
+}
