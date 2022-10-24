@@ -1,15 +1,38 @@
 .makeFloors {
-  margin: 4rem;
+  margin: 2rem;
   width: 90%;
   display: flex;
   justify-content: space-around;
-
   border-top: 1px dashed rgb(15, 167, 71);
 }
 .makeLifts {
   height: 50px;
   position: relative;
   top: -3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 25px;
   background-color: rebeccapurple;
+}
+button {
+  height: 20px;
+  width: auto;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  background-color: royalblue;
+}
+#div {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  top: -8rem;
+}
+#floorsAndLifts {
+  margin-top: 8rem;
 }
