@@ -49,21 +49,18 @@ function createFloors(floors, lifts) {
 
   const floorContainer = document.createElement("div");
   floorContainer.setAttribute("class", "floor");
-  // floorContainer.classList.add("floor");
+
   floorContainer.dataset.floor = floors;
 
-  //  button container
   const buttonContainer = document.createElement("div");
-  // buttonContainer.classList.add("btn-div");
+
   buttonContainer.setAttribute("class", "btn-div");
 
   const UpButton = document.createElement("button");
   const DownButton = document.createElement("button");
 
-  // UpButton.classList.add("up-down");
   UpButton.setAttribute("class", "up-down");
   DownButton.setAttribute("class", "up-down");
-  // DownButton.classList.add("up-down");
 
   UpButton.setAttribute("id", floors);
   DownButton.setAttribute("id", floors);
@@ -79,7 +76,6 @@ function createFloors(floors, lifts) {
 
   let floorNumber = document.createElement("p");
 
-  // floorNumber.classList.add("floorName");
   floorNumber.setAttribute("class", "floorName");
 
   floorNumber.innerText = `Floor ${floors}`;
@@ -108,10 +104,8 @@ function createFloors(floors, lifts) {
       leftDoor = document.createElement("div");
       RightDoor = document.createElement("div");
 
-      // leftDoor.classList.add("left-door");
       leftDoor.setAttribute("class", "left-door");
       RightDoor.setAttribute("class", "right-door");
-      // RightDoor.classList.add("right-door");
 
       Lifts.appendChild(leftDoor);
       Lifts.appendChild(RightDoor);
@@ -128,7 +122,6 @@ function createFloors(floors, lifts) {
 
 let x = 0;
 
-// Up down button getting clicked
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("up-down")) {
     if (e.target.dataset.floor === x) {
@@ -153,8 +146,6 @@ function LiftStatus(clickedFloor) {
       if (onFloorVal === clickedFloor) {
         return;
       }
-
-      console.log("check next");
     } else {
       for (let i = 0; i < lifts.length; i++) {
         let onFloorVal = parseInt(lifts[i].getAttribute("onfloor"));
@@ -180,7 +171,6 @@ function MoveLift(clickedFloor, pos) {
   const elevators = document.getElementsByClassName("lift-div");
 
   const elevator = elevators[pos];
-  console.log(pos);
 
   let currentFloor = elevator.getAttribute("onfloor");
   let duration = Math.abs(parseInt(clickedFloor) - parseInt(currentFloor)) * 2;
@@ -203,7 +193,6 @@ function MoveLift(clickedFloor, pos) {
     elevator.children[1].style.transform = "none";
   }, duration * 1000 + 4000);
 
-  //  Remove the busy status
   setTimeout(() => {
     elevator.classList.remove("busy");
 

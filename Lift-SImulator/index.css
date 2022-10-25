@@ -61,6 +61,8 @@ input {
 p {
   color: #fff;
   text-align: right;
+  position: relative;
+  top: -6rem;
 }
 
 .up-down {
