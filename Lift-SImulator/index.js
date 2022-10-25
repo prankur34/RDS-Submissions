@@ -19,11 +19,11 @@ submitButton.addEventListener("click", () => {
   } else if (!LiftInput.value) {
     alert("Please enter lift number in range 1-4");
   } else if (LiftInput.value > 4) {
-    alert("Maximum 4 lifts are allowed!");
+    alert("only 4 lifts are allowed!");
   } else if (LiftInput.value == 0 || floorInput.value == 0) {
-    alert("Value cannot be zero");
+    alert("Value can't be zero");
   } else if (floorInput.value > 15) {
-    alert("Maximum no of floors is 15!");
+    alert("Maximum no of floors are 15");
   } else if (LiftInput.value < 0 || floorInput.value < 0) {
     alert("No negative values are allowed");
   } else {

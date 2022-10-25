@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #000;
+  background-color: rgb(155, 147, 147);
 }
 
 h2 {
@@ -19,7 +19,6 @@ h2 {
 
 .input__container {
   display: flex;
-  flex-direction: column;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -53,7 +52,6 @@ input {
   outline: none;
   margin: 0.5em;
   color: #fff;
-  border-radius: 4px;
 }
 
 #container {
@@ -92,7 +90,7 @@ p {
   width: 90px;
   height: 100px;
   margin-left: 1em;
-  border: 0.5px solid red;
+  border: 0.5px solid rgb(73, 202, 231);
   z-index: 1;
   background-color: white;
   display: flex;
@@ -165,7 +163,7 @@ p {
     width: 60px;
     height: 100px;
     margin-left: 0.7em;
-    border: 0.5px solid red;
+    border: 0.5px solid rgb(72, 189, 228);
     z-index: 1;
     background-color: white;
     display: flex;
@@ -210,7 +208,7 @@ p {
     width: 80x;
     height: 100px;
     margin-left: 2em;
-    border: 0.5px solid red;
+    border: 0.5px solid rgb(93, 190, 222);
     z-index: 1;
     background-color: white;
     display: flex;
