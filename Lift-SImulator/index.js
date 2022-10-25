@@ -30,36 +30,40 @@ submitButton.addEventListener("click", () => {
     container.innerHTML = " ";
     liftContainer.innerHTML = "";
     for (let i = floorInput.value; i > 0; i--) {
-      //Function to genereate floors
+      // make floors
       createFloors(i, LiftInput.value);
     }
 
-    //remove the values after submitting
+    //empty input box
     LiftInput.value = "";
     floorInput.value = "";
   }
 });
 
-// Function To Create Floors
+// make Floors
 
 function createFloors(floors, lifts) {
   const floorDiv = document.createElement("div");
 
-  floorDiv.classList.add("floordiv");
+  floorDiv.setAttribute("class", "floordiv");
 
   const floorContainer = document.createElement("div");
-  floorContainer.classList.add("floor");
+  floorContainer.setAttribute("class", "floor");
+  // floorContainer.classList.add("floor");
   floorContainer.dataset.floor = floors;
 
   //  button container
   const buttonContainer = document.createElement("div");
-  buttonContainer.classList.add("btn-div");
+  // buttonContainer.classList.add("btn-div");
+  buttonContainer.setAttribute("class", "btn-div");
 
   const UpButton = document.createElement("button");
   const DownButton = document.createElement("button");
 
-  UpButton.classList.add("up-down");
-  DownButton.classList.add("up-down");
+  // UpButton.classList.add("up-down");
+  UpButton.setAttribute("class", "up-down");
+  DownButton.setAttribute("class", "up-down");
+  // DownButton.classList.add("up-down");
 
   UpButton.setAttribute("id", floors);
   DownButton.setAttribute("id", floors);
@@ -75,9 +79,10 @@ function createFloors(floors, lifts) {
 
   let floorNumber = document.createElement("p");
 
-  floorNumber.classList.add("floorName");
+  // floorNumber.classList.add("floorName");
+  floorNumber.setAttribute("class", "floorName");
 
-  floorNumber.innerText = `No ${floors}`;
+  floorNumber.innerText = `Floor ${floors}`;
 
   buttonContainer.append(floorNumber);
 
@@ -93,8 +98,7 @@ function createFloors(floors, lifts) {
     //Check all lifts should be on 1st
     if (floors === 1) {
       let Lifts = document.createElement("div");
-
-      Lifts.classList.add("lift-div");
+      Lifts.setAttribute("class", "lift-div");
 
       Lifts.setAttribute("onfloor", 1);
 
@@ -104,15 +108,16 @@ function createFloors(floors, lifts) {
       leftDoor = document.createElement("div");
       RightDoor = document.createElement("div");
 
-      leftDoor.classList.add("left-door");
-      RightDoor.classList.add("right-door");
+      // leftDoor.classList.add("left-door");
+      leftDoor.setAttribute("class", "left-door");
+      RightDoor.setAttribute("class", "right-door");
+      // RightDoor.classList.add("right-door");
 
       Lifts.appendChild(leftDoor);
       Lifts.appendChild(RightDoor);
 
       liftContainer.appendChild(Lifts);
-
-      liftContainer.classList.add("lift");
+      liftContainer.setAttribute("class", "lift");
 
       floorContainer.append(liftContainer);
 
@@ -142,7 +147,7 @@ function LiftStatus(clickedFloor) {
   let pos;
 
   for (let i = 0; i < lifts.length; i++) {
-    if (lifts[i].classList.contains("engaged")) {
+    if (lifts[i].classList.contains("busy")) {
       let onFloorVal = parseInt(lifts[i].getAttribute("onfloor"));
 
       if (onFloorVal === clickedFloor) {
@@ -186,7 +191,7 @@ function MoveLift(clickedFloor, pos) {
   elevator.style.transform = `translateY(-${
     100 * parseInt(clickedFloor) - 100
   }px)`;
-  elevator.classList.add("engaged");
+  elevator.classList.add("busy");
 
   setTimeout(() => {
     elevator.children[0].style.transform = "translateX(-100%)";
@@ -200,7 +205,7 @@ function MoveLift(clickedFloor, pos) {
 
   //  Remove the busy status
   setTimeout(() => {
-    elevator.classList.remove("engaged");
+    elevator.classList.remove("busy");
 
     if (targetFloors.length) {
       MoveLift(targetFloors.shift(), pos);
