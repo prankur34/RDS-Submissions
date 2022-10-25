@@ -1,62 +1,207 @@
-/*
-Algorithm steps : 
-1 -Take input and and make lift and floors based on  the input value
-2- Make lifts at the first floor lifts should be dynamic in nature 
-3- Make up/down button such that the first floor should have only Up buttona nd
-top floor should have only down buttona while other should have both up and down \
-button
-4-  simulate the lifts like when clicked on the top button the lift  which is free should 
-be move to the floor from where it is being called vice-versa for down button
- */
+const floorInput = document.getElementById("floor-input");
+const LiftInput = document.getElementById("lift-input");
+const submitButton = document.getElementById("submit-btn");
+const container = document.getElementById("container");
+const liftContainer = document.createElement("div");
 
-const floorsInput = document.getElementById("input_floors");
-const liftsInput = document.getElementById("input_lifts");
-const submitForm = document.getElementById("form");
-const floors = [];
+let floorVal = "";
+let liftVal = "";
+var prevFloor = 0;
 
-// make floors
-function makeFloors() {
-  for (let i = 1 || 0; i <= floorsInput.value; i++) {
-    const makeFloors = document.createElement("div");
-    makeFloors.setAttribute("class", "makeFloors");
-    const floorAndLifts = document.getElementById("floorsAndLifts");
-    floorAndLifts.appendChild(makeFloors);
-    floors.push(makeFloors);
-    const div = document.createElement("div");
-    div.setAttribute("id", "div");
-    const upbutton = document.createElement("button");
-    upbutton.setAttribute("class", "button");
-    upbutton.innerText = "up";
-    const downbutton = document.createElement("button");
-    downbutton.setAttribute("class", "button");
-    downbutton.innerText = "down";
-    div
-      .appendChild(upbutton)
-      .addEventListener("click", () => console.log("up"));
-    div
-      .appendChild(downbutton)
-      .addEventListener("click", () => console.log("down"));
-    floorAndLifts.appendChild(div);
+let targetFloors = [];
+
+//on Submit button add values
+submitButton.addEventListener("click", () => {
+  if (!LiftInput.value && !floorInput.value) {
+    alert("Please Enter number to generate Floors and Lifts");
+  } else if (!floorInput.value) {
+    alert("Please enter floor number in range 1-15");
+  } else if (!LiftInput.value) {
+    alert("Please enter lift number in range 1-4");
+  } else if (LiftInput.value > 4) {
+    alert("Maximum 4 lifts are allowed!");
+  } else if (LiftInput.value == 0 || floorInput.value == 0) {
+    alert("Value cannot be zero");
+  } else if (floorInput.value > 15) {
+    alert("Maximum no of floors is 15!");
+  } else if (LiftInput.value < 0 || floorInput.value < 0) {
+    alert("No negative values are allowed");
+  } else {
+    container.innerHTML = " ";
+    liftContainer.innerHTML = "";
+    for (let i = floorInput.value; i > 0; i--) {
+      //Function to genereate floors
+      createFloors(i, LiftInput.value);
+    }
+
+    //remove the values after submitting
+    LiftInput.value = "";
+    floorInput.value = "";
+  }
+});
+
+// Function To Create Floors
+
+function createFloors(floors, lifts) {
+  const floorDiv = document.createElement("div");
+
+  floorDiv.classList.add("floordiv");
+
+  const floorContainer = document.createElement("div");
+  floorContainer.classList.add("floor");
+  floorContainer.dataset.floor = floors;
+
+  //  button container
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("btn-div");
+
+  const UpButton = document.createElement("button");
+  const DownButton = document.createElement("button");
+
+  UpButton.classList.add("up-down");
+  DownButton.classList.add("up-down");
+
+  UpButton.setAttribute("id", floors);
+  DownButton.setAttribute("id", floors);
+
+  UpButton.innerText = "UP";
+  DownButton.innerText = "Down";
+
+  UpButton.dataset.floor = floors;
+  DownButton.dataset.floor = floors;
+
+  buttonContainer.append(UpButton);
+  buttonContainer.append(DownButton);
+
+  let floorNumber = document.createElement("p");
+
+  floorNumber.classList.add("floorName");
+
+  floorNumber.innerText = `No ${floors}`;
+
+  buttonContainer.append(floorNumber);
+
+  floorContainer.append(buttonContainer);
+
+  floorDiv.append(floorContainer);
+
+  container.append(floorDiv);
+
+  //Logic to generate Lifts
+
+  for (let j = 0; j < lifts; j++) {
+    //Check all lifts should be on 1st
+    if (floors === 1) {
+      let Lifts = document.createElement("div");
+
+      Lifts.classList.add("lift-div");
+
+      Lifts.setAttribute("onfloor", 1);
+
+      Lifts.dataset.currentLocation = prevFloor;
+
+      leftDoor = document.createElement("div");
+      RightDoor = document.createElement("div");
+
+      leftDoor.classList.add("left-door");
+      RightDoor.classList.add("right-door");
+
+      Lifts.appendChild(leftDoor);
+      Lifts.appendChild(RightDoor);
+
+      liftContainer.appendChild(Lifts);
+
+      liftContainer.classList.add("lift");
+
+      floorContainer.append(liftContainer);
+
+      floorDiv.append(floorContainer);
+    }
   }
 }
 
-// make lifts
-function makeLifts() {
-  for (let i = 1; i <= liftsInput.value; i++) {
-    const makeLifts = document.createElement("div");
-    makeLifts.setAttribute("class", "makeLifts");
-    floors[floors.length - 1].appendChild(makeLifts);
+let x = 0;
+
+// Up down button getting clicked
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("up-down")) {
+    if (e.target.dataset.floor === x) {
+      return;
+    } else {
+      LiftStatus(e.target.dataset.floor);
+    }
+
+    x = e.target.dataset.floor;
+  }
+});
+
+function LiftStatus(clickedFloor) {
+  const lifts = document.querySelectorAll(".lift-div");
+
+  let pos;
+
+  for (let i = 0; i < lifts.length; i++) {
+    if (lifts[i].classList.contains("engaged")) {
+      let onFloorVal = parseInt(lifts[i].getAttribute("onfloor"));
+
+      if (onFloorVal === clickedFloor) {
+        return;
+      }
+
+      console.log("check next");
+    } else {
+      for (let i = 0; i < lifts.length; i++) {
+        let onFloorVal = parseInt(lifts[i].getAttribute("onfloor"));
+
+        if (onFloorVal === clickedFloor) {
+          MoveLift(clickedFloor, i);
+          return;
+        }
+      }
+
+      pos = i;
+      MoveLift(clickedFloor, pos);
+      break;
+    }
+  }
+
+  if (pos === undefined) {
+    targetFloors.push(clickedFloor);
   }
 }
-// make buttons
 
-function makeMovingButtons() {}
+function MoveLift(clickedFloor, pos) {
+  const elevators = document.getElementsByClassName("lift-div");
 
-function simulateLifts(e) {
-  e.preventDefault();
-  makeFloors();
-  makeLifts();
-  makeMovingButtons();
+  const elevator = elevators[pos];
+
+  let currentFloor = elevator.getAttribute("onfloor");
+  let duration = Math.abs(parseInt(clickedFloor) - parseInt(currentFloor)) * 2;
+
+  elevator.setAttribute("onfloor", clickedFloor);
+
+  elevator.style.transition = `transform ${duration}s linear`;
+  elevator.style.transform = `translateY(-${
+    100 * parseInt(clickedFloor) - 100
+  }px)`;
+  elevator.classList.add("engaged");
+
+  setTimeout(() => {
+    elevator.children[0].style.transform = "translateX(-100%)";
+    elevator.children[1].style.transform = "translateX(100%)";
+  }, duration * 1000 + 1000);
+
+  setTimeout(() => {
+    elevator.children[0].style.transform = "none";
+    elevator.children[1].style.transform = "none";
+  }, duration * 1000 + 4000);
+
+  //  Remove the busy status
+  setTimeout(() => {
+    elevator.classList.remove("engaged");
+
+    if (targetFloors.length) {
+      MoveLift(targetFloors.shift(), pos);
+    }
+  }, duration * 1000 + 7000);
 }
-
-submitForm.addEventListener("click", simulateLifts);
