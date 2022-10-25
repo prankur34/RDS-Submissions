@@ -99,6 +99,7 @@ function createFloors(floors, lifts) {
       Lifts.setAttribute("onfloor", 1);
 
       Lifts.dataset.currentLocation = prevFloor;
+      console.log(prevFloor);
 
       leftDoor = document.createElement("div");
       RightDoor = document.createElement("div");
@@ -174,6 +175,7 @@ function MoveLift(clickedFloor, pos) {
   const elevators = document.getElementsByClassName("lift-div");
 
   const elevator = elevators[pos];
+  console.log(pos);
 
   let currentFloor = elevator.getAttribute("onfloor");
   let duration = Math.abs(parseInt(clickedFloor) - parseInt(currentFloor)) * 2;

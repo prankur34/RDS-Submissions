@@ -172,7 +172,6 @@ p {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  /* CSS */
   .input__container {
     width: 25rem;
     padding: 0.75em;
@@ -193,7 +192,6 @@ p {
 
   .lift {
     display: flex;
-    /* margin-left: 0.5em; */
   }
 
   .floor {
@@ -216,10 +214,7 @@ p {
   }
 }
 
-/* media query for larger screens */
-
 @media (min-width: 1025px) and (max-width: 1500px) {
-  /* CSS */
   .input__container {
     width: 25rem;
     padding: 0.75em;
@@ -240,7 +235,6 @@ p {
 
   .lift {
     display: flex;
-    /* margin-left: 0.5em; */
   }
 
   .floor {
